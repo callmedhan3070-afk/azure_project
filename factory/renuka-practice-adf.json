@@ -1,0 +1,9 @@
+{
+	"name": "renuka-practice-adf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "61fa9a47-c505-442a-ab7d-8bb1b0d55b61",
+		"tenantId": "f2e74045-e8f0-444a-94c5-32799c9e5d65"
+	}
+}
