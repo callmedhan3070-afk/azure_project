@@ -1,0 +1,47 @@
+{
+	"name": "DS_sqldb_df_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_sqlServerDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "empid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "empname",
+				"type": "varchar"
+			},
+			{
+				"name": "skill1",
+				"type": "varchar"
+			},
+			{
+				"name": "skill2",
+				"type": "varchar"
+			},
+			{
+				"name": "skill3",
+				"type": "varchar"
+			},
+			{
+				"name": "city",
+				"type": "varchar"
+			},
+			{
+				"name": "country",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "emp_information_final"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

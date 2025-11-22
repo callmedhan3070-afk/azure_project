@@ -1,0 +1,130 @@
+{
+	"name": "6_appendVari",
+	"properties": {
+		"activities": [
+			{
+				"name": "getPernDtls",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "prsn_dtls",
+					"value": [
+						{
+							"person_id": "101",
+							"person_name": "jaydeep"
+						},
+						{
+							"person_id": "102",
+							"person_name": "sandeep"
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "getPernDtls",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('prsn_dtls')",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "person_name",
+								"value": {
+									"value": "@item().person_name",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Append variable1",
+							"type": "AppendVariable",
+							"dependsOn": [
+								{
+									"activity": "Set variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "name_list",
+								"value": {
+									"value": "@variables('person_name')",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "getListNames",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "msg",
+					"value": {
+						"value": "@concat('persons names are',variables('name_list'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"prsn_dtls": {
+				"type": "Array"
+			},
+			"person_name": {
+				"type": "String"
+			},
+			"name_list": {
+				"type": "Array"
+			},
+			"msg": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-11-13T04:20:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

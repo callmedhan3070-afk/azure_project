@@ -1,0 +1,30 @@
+{
+	"name": "DS_custdltsTle_df_assert",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_sqlServerDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "cust_id",
+				"type": "varchar"
+			},
+			{
+				"name": "cust_name",
+				"type": "varchar"
+			},
+			{
+				"name": "country",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "custdtls"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

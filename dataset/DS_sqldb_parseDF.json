@@ -1,0 +1,35 @@
+{
+	"name": "DS_sqldb_parseDF",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_sqlServerDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "empid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "empname",
+				"type": "varchar"
+			},
+			{
+				"name": "skills",
+				"type": "varchar"
+			},
+			{
+				"name": "adsress",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "empinfor"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

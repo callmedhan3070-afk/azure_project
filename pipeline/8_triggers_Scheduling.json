@@ -1,0 +1,40 @@
+{
+	"name": "8_triggers_Scheduling",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "name",
+					"value": {
+						"value": "@concat('my location is the ',variables('locatio'),'and my location is ',variables('education'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"name": {
+				"type": "String"
+			},
+			"locatio": {
+				"type": "String",
+				"defaultValue": "pune"
+			},
+			"education": {
+				"type": "String",
+				"defaultValue": "engg"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-11-13T09:43:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "adfactoryJK",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9c49a716-3029-435a-b91e-f90844d1dba9",
+		"tenantId": "f2e74045-e8f0-444a-94c5-32799c9e5d65"
+	}
+}

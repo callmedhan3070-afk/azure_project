@@ -1,0 +1,68 @@
+{
+	"name": "7_assignment_flatternJSON",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_json",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_json_output",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flatten1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          address as (currentaddress as (city as string, country as string), permanentadress as (city as string, country as string)),",
+				"          gender as string,",
+				"          id as short,",
+				"          languages as string[],",
+				"          name as string,",
+				"          qualifcation as string[]",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> source1",
+				"source1 foldDown(unrollMultiple(languages,qualifcation),",
+				"     mapColumn(",
+				"          id,",
+				"          name,",
+				"          gender,",
+				"          langu = languages,",
+				"          {p.city} = address.permanentadress.city,",
+				"          {p.country} = address.permanentadress.country,",
+				"          {c.city} = address.currentaddress.city,",
+				"          {c.country} = address.currentaddress.country,",
+				"          qual = qualifcation",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['outputAssign.json'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
